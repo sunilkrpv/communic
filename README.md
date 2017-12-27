@@ -3,9 +3,9 @@ Simple Java Client-Server socket library. Can be used to support any simple clie
 
 # Classes
 This library has 3 classes.
-* Driver - the main application driver class. This has the main() method and depending on the input arguements the module would function as a server or a client.
-* CommunicClient - the main class that enables the module to function as the client connecting to the server. Supports text input from the keyboard only.
-* CommunicServer - the main class that enables to module to function as the server. This class binds the incoming port with the address and listens for incoming client connections. Once a new client connection is established, the data processing is handled through individual threads.
+* **Driver** - the main application driver class. This has the main() method and depending on the input arguements the module would function as a server or a client.
+* **CommunicClient** - the main class that enables the module to function as the client connecting to the server. Supports text input from the keyboard only.
+* **CommunicServer** - the main class that enables to module to function as the server. This class binds the incoming port with the address and listens for incoming client connections. Once a new client connection is established, the data processing is handled through individual threads.
 
 ### Usage
 * server mode - to run as server mode pass the following arguements **java -jar communic.jar -server -port 'port-number' -address 'ip/host-name'**
