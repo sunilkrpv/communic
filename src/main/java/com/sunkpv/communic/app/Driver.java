@@ -1,5 +1,8 @@
 package com.sunkpv.communic.app;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -63,8 +66,33 @@ public class Driver {
 	}
 
 	private static void runClient() {
+		
 		CommunicClient connection = new CommunicClient(bootUp.address, bootUp.port);
-		connection.sync();
+		connection.connect();
+		
+		Scanner sc = new Scanner(System.in);
+		String line = "";
+		do {
+			try {
+				
+				line = sc.nextLine();
+				connection.send(line.getBytes());
+			} catch (Exception e) {
+				break;
+			}
+			
+		} while(!"^C".equals(line));
+		
+		connection.disconnect();
+		
+		System.out.println("type any key to exit");
+		try {
+			sc.close();
+			System.in.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static void runServer() {
@@ -128,7 +156,7 @@ public class Driver {
 		
 		bootUp.runAs = (byte) (cmd.hasOption("server") ? -128 : 127);
 		bootUp.address = cmd.getOptionValue("address");
-		bootUp.port = Integer.valueOf(cmd.getOptionValue("port"));
+		bootUp.port = Integer.parseInt(cmd.getOptionValue("port"));
 		
 		return true;
 	}
